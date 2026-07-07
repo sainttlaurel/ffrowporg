@@ -332,13 +332,13 @@ function Navbar() {
         </button>
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <button key={l} onClick={() => scrollTo(l)} className="font-['Plus_Jakarta_Sans'] text-sm tracking-wider text-amber-100/70 hover:text-amber-300 transition-colors duration-300 uppercase">{l}</button>
+            <a key={l} href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer" className="font-['Plus_Jakarta_Sans'] text-sm tracking-wider text-amber-100/70 hover:text-amber-300 transition-colors duration-300 uppercase">{l}</a>
           ))}
-          <button onClick={() => scrollTo("register")}
+          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
             className="px-5 py-2 rounded-lg font-['Plus_Jakarta_Sans'] text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{ background: "linear-gradient(135deg, #c94a1a, #e8621a)", color: "#fff", boxShadow: "0 0 20px rgba(201,74,26,0.4)" }}>
             Register Now
-          </button>
+          </a>
         </div>
         <button onClick={() => setOpen(!open)} className="md:hidden text-amber-300">
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -348,13 +348,13 @@ function Navbar() {
         <div className="md:hidden px-6 pb-6 pt-2 flex flex-col gap-4"
           style={{ background: "rgba(5,3,10,0.97)", borderTop: "1px solid rgba(212,160,23,0.1)" }}>
           {links.map((l) => (
-            <button key={l} onClick={() => scrollTo(l)} className="font-['Plus_Jakarta_Sans'] text-sm tracking-wider text-amber-100/70 hover:text-amber-300 transition-colors text-left uppercase">{l}</button>
+            <a key={l} href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer" className="font-['Plus_Jakarta_Sans'] text-sm tracking-wider text-amber-100/70 hover:text-amber-300 transition-colors text-left uppercase">{l}</a>
           ))}
-          <button onClick={() => scrollTo("register")}
+          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
             className="px-5 py-3 rounded-lg font-['Plus_Jakarta_Sans'] text-sm font-semibold tracking-wider uppercase w-full"
             style={{ background: "linear-gradient(135deg, #c94a1a, #e8621a)", color: "#fff" }}>
             Register Now
-          </button>
+          </a>
         </div>
       )}
     </nav>
@@ -420,17 +420,17 @@ function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
+          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
             className="group flex items-center gap-3 px-8 py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105"
             style={{ background: "linear-gradient(135deg, #c94a1a, #f07030)", color: "#fff", boxShadow: "0 0 30px rgba(201,74,26,0.5), 0 4px 20px rgba(0,0,0,0.4)", fontSize: "0.95rem" }}>
             <Flame size={18} />Reserve Your Slot
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-          <button onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+          </a>
+          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-3 px-8 py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105"
             style={{ background: "rgba(212,160,23,0.1)", border: "1px solid rgba(212,160,23,0.4)", color: "#d4a017", fontSize: "0.95rem" }}>
             Learn More<ChevronDown size={16} />
-          </button>
+          </a>
         </div>
 
         <div className="mt-20 flex justify-center">
@@ -821,12 +821,12 @@ function Register() {
                 </div>
               ))}
               <div className="pt-2 space-y-3">
-                <a href="https://m.me/" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #0066FF, #00A6FF)", color: "#fff", boxShadow: "0 0 20px rgba(0,102,255,0.3)" }}>
                   <MessageCircle size={18} />Message Us on Messenger
                 </a>
-                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #25D366, #128C7E)", color: "#fff", boxShadow: "0 0 20px rgba(37,211,102,0.3)" }}>
                   <Phone size={18} />Message Us on WhatsApp
@@ -845,7 +845,7 @@ function Register() {
                 <p className="font-['Plus_Jakarta_Sans'] text-sm leading-relaxed mb-6" style={{ color: "rgba(240,230,211,0.6)" }}>
                   Thank you for registering, <strong style={{ color: "#d4a017" }}>{form.name.split(" ")[0]}</strong>! We will reach out via your contact details with confirmation and next steps. Welcome to the Dragons family!
                 </p>
-                <a href="https://m.me/" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #0066FF, #00A6FF)", color: "#fff", boxShadow: "0 0 16px rgba(0,102,255,0.3)" }}>
                   <MessageCircle size={16} />Reach Out on Messenger
@@ -969,9 +969,9 @@ function Footer() {
             <p className="font-['Cinzel'] font-bold text-xs tracking-widest uppercase mb-4" style={{ color: "#d4a017" }}>Connect With Us</p>
             <div className="flex gap-3 mb-6">
               {[
-                { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/" },
-                { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.instagram.com/" },
-                { icon: <MessageCircle size={18} />, label: "Messenger", href: "https://m.me/" },
+                { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/lexie.lonzkie" },
+                { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.facebook.com/lexie.lonzkie" },
+                { icon: <MessageCircle size={18} />, label: "Messenger", href: "https://www.facebook.com/lexie.lonzkie" },
               ].map(({ icon, label, href }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                   className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-amber-400/40"
