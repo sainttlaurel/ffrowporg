@@ -3,8 +3,60 @@ import {
   Menu, X, Flame, Shield, Star, Users, TrendingUp, Heart,
   ChevronDown, MessageCircle, Phone, Instagram, Facebook,
   ArrowRight, Check, CalendarDays, Clock, Zap, Monitor,
-  Eye, Briefcase, Map, Trophy
+  Eye, Briefcase, Map, Trophy, ArrowUp, Copy, CheckCheck
 } from "lucide-react";
+import confetti from "canvas-confetti";
+
+/* ─── Back to Top Button ─── */
+function BackToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const h = () => setShow(window.scrollY > 600);
+    window.addEventListener("scroll", h, { passive: true });
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+      className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110"
+      style={{
+        background: "linear-gradient(135deg, #c94a1a, #f07030)",
+        boxShadow: "0 0 24px rgba(201,74,26,0.5), 0 4px 12px rgba(0,0,0,0.4)",
+        opacity: show ? 1 : 0,
+        pointerEvents: show ? "auto" : "none",
+        transform: show ? "translateY(0)" : "translateY(20px)",
+      }}
+    >
+      <ArrowUp size={20} className="text-white" />
+    </button>
+  );
+}
+
+/* ─── Copy-to-Clipboard Hashtag ─── */
+function CopyHashtag({ tag }: { tag: string }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(tag);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* fallback: ignore */ }
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-2 font-['Plus_Jakarta_Sans'] text-sm transition-colors hover:text-amber-400 cursor-pointer group"
+      style={{ color: copied ? "#d4a017" : "rgba(240,230,211,0.5)" }}
+    >
+      {tag}
+      {copied
+        ? <CheckCheck size={12} className="text-green-400" />
+        : <Copy size={12} className="opacity-0 group-hover:opacity-60 transition-opacity" />
+      }
+    </button>
+  );
+}
 
 /* ─── Utility ─── */
 function cn(...classes: (string | undefined | false | null)[]) {
@@ -490,10 +542,12 @@ function About() {
               <p className="font-['Cinzel'] font-semibold tracking-widest uppercase text-sm" style={{ color: "#d4a017" }}>Built on Four Pillars</p>
               <div className="grid grid-cols-2 gap-4">
                 {pillars.map(({ icon, label }) => (
-                  <div key={label} className="flex items-center gap-3 p-4 rounded-xl transition-all duration-300 hover:border-amber-400/40 hover:scale-105 cursor-default"
+                  <div key={label} className="flex items-center gap-3 p-4 rounded-xl transition-all duration-300 hover:border-amber-400/40 hover:scale-105 cursor-default group/pillar relative overflow-hidden"
                     style={{ background: "rgba(212,160,23,0.06)", border: "1px solid rgba(212,160,23,0.15)" }}>
-                    <div className="text-amber-400">{icon}</div>
-                    <span className="font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm" style={{ color: "#f0e6d3" }}>{label}</span>
+                    <div className="absolute inset-0 opacity-0 group-hover/pillar:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl"
+                      style={{ background: "radial-gradient(ellipse at center, rgba(212,160,23,0.12) 0%, transparent 70%)" }} />
+                    <div className="text-amber-400 relative z-10 transition-transform duration-300 group-hover/pillar:scale-110">{icon}</div>
+                    <span className="font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm relative z-10" style={{ color: "#f0e6d3" }}>{label}</span>
                   </div>
                 ))}
               </div>
@@ -691,7 +745,41 @@ function Speaker() {
 function Register() {
   const [form, setForm] = useState({ name: "", contact: "", email: "" });
   const [submitted, setSubmitted] = useState(false);
-  const handle = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const validate = () => {
+    const e: Record<string, boolean> = {};
+    if (!form.name.trim()) e.name = true;
+    if (!form.contact.trim()) e.contact = true;
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = true;
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const fireConfetti = () => {
+    const end = Date.now() + 1500;
+    const colors = ["#c94a1a", "#d4a017", "#f07030", "#4a90d9", "#f5c842"];
+    (function frame() {
+      confetti({ particleCount: 4, angle: 60, spread: 65, origin: { x: 0, y: 0.7 }, colors });
+      confetti({ particleCount: 4, angle: 120, spread: 65, origin: { x: 1, y: 0.7 }, colors });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  };
+
+  const handle = (e: React.FormEvent) => {
+    e.preventDefault();
+    setTouched({ name: true, contact: true, email: true });
+    if (!validate()) return;
+    setSubmitted(true);
+    fireConfetti();
+  };
+
+  const handleBlur = (id: string) => {
+    setTouched((t) => ({ ...t, [id]: true }));
+    validate();
+  };
+
   return (
     <section id="register" className="relative py-28 px-6 overflow-hidden" style={{ background: "#05030a" }}>
       <div className="absolute inset-0 pointer-events-none"
@@ -753,15 +841,20 @@ function Register() {
                   style={{ background: "linear-gradient(135deg, #c94a1a, #e8621a)", boxShadow: "0 0 30px rgba(201,74,26,0.4)" }}>
                   <Check size={36} className="text-white" />
                 </div>
-                <h3 className="font-['Cinzel'] font-bold text-xl tracking-wider mb-3" style={{ color: "#f0e6d3" }}>You are In!</h3>
-                <p className="font-['Plus_Jakarta_Sans'] text-sm leading-relaxed" style={{ color: "rgba(240,230,211,0.6)" }}>
-                  Thank you for registering. We will reach out via your contact details with confirmation and next steps. Welcome to the Dragons family!
+                <h3 className="font-['Cinzel'] font-bold text-xl tracking-wider mb-3" style={{ color: "#f0e6d3" }}>You are In! 🐉</h3>
+                <p className="font-['Plus_Jakarta_Sans'] text-sm leading-relaxed mb-6" style={{ color: "rgba(240,230,211,0.6)" }}>
+                  Thank you for registering, <strong style={{ color: "#d4a017" }}>{form.name.split(" ")[0]}</strong>! We will reach out via your contact details with confirmation and next steps. Welcome to the Dragons family!
                 </p>
+                <a href="https://m.me/" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #0066FF, #00A6FF)", color: "#fff", boxShadow: "0 0 16px rgba(0,102,255,0.3)" }}>
+                  <MessageCircle size={16} />Reach Out on Messenger
+                </a>
               </GlassCard>
             ) : (
               <GlassCard>
                 <h3 className="font-['Cinzel'] font-bold tracking-wider mb-8 text-xl" style={{ color: "#f0e6d3" }}>Pre-Registration Form</h3>
-                <form onSubmit={handle} className="space-y-5">
+                <form onSubmit={handle} className="space-y-5" noValidate>
                   {[
                     { id: "name", label: "Full Name", placeholder: "Your full name", type: "text" },
                     { id: "contact", label: "Contact / Messenger", placeholder: "Phone or Messenger handle", type: "text" },
@@ -770,16 +863,32 @@ function Register() {
                     <div key={id}>
                       <label className="block font-['Plus_Jakarta_Sans'] font-semibold text-xs tracking-widest uppercase mb-2" style={{ color: "#d4a017" }}>{label}</label>
                       <input type={type} value={form[id as keyof typeof form]}
-                        onChange={(e) => setForm({ ...form, [id]: e.target.value })}
-                        placeholder={placeholder} required
+                        onChange={(e) => { setForm({ ...form, [id]: e.target.value }); if (touched[id]) validate(); }}
+                        onBlur={() => handleBlur(id)}
+                        placeholder={placeholder}
                         className="w-full px-4 py-3.5 rounded-xl font-['Plus_Jakarta_Sans'] text-sm outline-none transition-all duration-200"
-                        style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(212,160,23,0.2)", color: "#f0e6d3", caretColor: "#d4a017" }} />
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: touched[id] && errors[id]
+                            ? "1px solid rgba(239,68,68,0.7)"
+                            : touched[id] && !errors[id] && form[id as keyof typeof form]
+                              ? "1px solid rgba(34,197,94,0.5)"
+                              : "1px solid rgba(212,160,23,0.2)",
+                          color: "#f0e6d3",
+                          caretColor: "#d4a017",
+                          boxShadow: touched[id] && errors[id] ? "0 0 12px rgba(239,68,68,0.15)" : "none",
+                        }} />
+                      {touched[id] && errors[id] && (
+                        <p className="font-['Plus_Jakarta_Sans'] text-xs mt-1.5" style={{ color: "#ef4444" }}>
+                          {id === "email" ? "Please enter a valid email address" : `${label} is required`}
+                        </p>
+                      )}
                     </div>
                   ))}
                   <button type="submit"
                     className="group w-full py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-bold tracking-widest uppercase text-sm mt-2 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3"
                     style={{ background: "linear-gradient(135deg, #c94a1a, #f07030)", color: "#fff", boxShadow: "0 0 30px rgba(201,74,26,0.4)" }}>
-                    <Flame size={18} />Message Us Now to Register
+                    <Flame size={18} />Reserve My Slot
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </form>
@@ -852,18 +961,23 @@ function Footer() {
             <p className="font-['Cinzel'] font-bold text-xs tracking-widest uppercase mb-4" style={{ color: "#d4a017" }}>Follow the Movement</p>
             <div className="space-y-2">
               {["#DragonsProject", "#dragonsprojectbyronaldallanuy", "#WalangShortcutSaTagumpay", "#OneTeamOneVision"].map((tag) => (
-                <p key={tag} className="font-['Plus_Jakarta_Sans'] text-sm transition-colors hover:text-amber-400 cursor-pointer" style={{ color: "rgba(240,230,211,0.5)" }}>{tag}</p>
+                <CopyHashtag key={tag} tag={tag} />
               ))}
             </div>
           </div>
           <div>
             <p className="font-['Cinzel'] font-bold text-xs tracking-widest uppercase mb-4" style={{ color: "#d4a017" }}>Connect With Us</p>
             <div className="flex gap-3 mb-6">
-              {[{ icon: <Facebook size={18} />, label: "Facebook" }, { icon: <Instagram size={18} />, label: "Instagram" }, { icon: <MessageCircle size={18} />, label: "Messenger" }].map(({ icon, label }) => (
-                <button key={label} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-amber-400/40"
+              {[
+                { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/" },
+                { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.instagram.com/" },
+                { icon: <MessageCircle size={18} />, label: "Messenger", href: "https://m.me/" },
+              ].map(({ icon, label, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-amber-400/40"
                   style={{ background: "rgba(212,160,23,0.08)", border: "1px solid rgba(212,160,23,0.15)", color: "#d4a017" }} aria-label={label}>
                   {icon}
-                </button>
+                </a>
               ))}
             </div>
             <p className="font-['Plus_Jakarta_Sans'] text-xs leading-relaxed" style={{ color: "rgba(240,230,211,0.4)" }}>
@@ -874,7 +988,7 @@ function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: "1px solid rgba(212,160,23,0.08)" }}>
           <p className="font-['Plus_Jakarta_Sans'] text-xs" style={{ color: "rgba(240,230,211,0.25)" }}>
-            © 2024 Dragons Project by Marlon M. Pilapil. All rights reserved.
+            © {new Date().getFullYear()} Dragons Project by Marlon M. Pilapil. All rights reserved.
           </p>
           <p className="font-['Cinzel'] text-xs tracking-widest italic" style={{ color: "rgba(212,160,23,0.35)" }}>
             Walang Shortcut sa Tagumpay.
@@ -909,6 +1023,7 @@ export default function App() {
       <FireDivider />
       <Testimonials />
       <Footer />
+      <BackToTop />
     </div>
   );
 }
