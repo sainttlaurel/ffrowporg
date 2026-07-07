@@ -1,62 +1,19 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
-  Menu, X, Flame, Shield, Star, Users, TrendingUp, Heart,
-  ChevronDown, MessageCircle, Phone, Instagram, Facebook,
+  Shield, Star, Users, TrendingUp, Heart,
+  ChevronDown, MessageCircle, Phone,
   ArrowRight, Check, CalendarDays, Clock, Zap, Monitor,
-  Eye, Briefcase, Map, Trophy, ArrowUp, Copy, CheckCheck
+  Eye, Briefcase, Map, Trophy, Flame
 } from "lucide-react";
 import confetti from "canvas-confetti";
+import { Navbar } from "../components/layout/Navbar";
+import { Footer } from "../components/layout/Footer";
+import { BackToTop } from "../components/layout/BackToTop";
+import { CopyHashtag } from "../components/ui/CopyHashtag";
+import { useFadeIn } from "../hooks/useFadeIn";
+import { useParallax } from "../hooks/useParallax";
+import { useCountdown } from "../hooks/useCountdown";
 
-/* ─── Back to Top Button ─── */
-function BackToTop() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const h = () => setShow(window.scrollY > 600);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
-  }, []);
-  return (
-    <button
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Back to top"
-      className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110"
-      style={{
-        background: "linear-gradient(135deg, #c94a1a, #f07030)",
-        boxShadow: "0 0 24px rgba(201,74,26,0.5), 0 4px 12px rgba(0,0,0,0.4)",
-        opacity: show ? 1 : 0,
-        pointerEvents: show ? "auto" : "none",
-        transform: show ? "translateY(0)" : "translateY(20px)",
-      }}
-    >
-      <ArrowUp size={20} className="text-white" />
-    </button>
-  );
-}
-
-/* ─── Copy-to-Clipboard Hashtag ─── */
-function CopyHashtag({ tag }: { tag: string }) {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(tag);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch { /* fallback: ignore */ }
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center gap-2 font-['Plus_Jakarta_Sans'] text-sm transition-colors hover:text-amber-400 cursor-pointer group"
-      style={{ color: copied ? "#d4a017" : "rgba(240,230,211,0.5)" }}
-    >
-      {tag}
-      {copied
-        ? <CheckCheck size={12} className="text-green-400" />
-        : <Copy size={12} className="opacity-0 group-hover:opacity-60 transition-opacity" />
-      }
-    </button>
-  );
-}
 
 /* ─── Utility ─── */
 function cn(...classes: (string | undefined | false | null)[]) {
@@ -186,19 +143,6 @@ function SmokeLayer() {
   );
 }
 
-/* ─── Fade-in hook ─── */
-function useFadeIn(threshold = 0.15) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return { ref, visible };
-}
 
 function FadeIn({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const { ref, visible } = useFadeIn();
@@ -210,22 +154,6 @@ function FadeIn({ children, className, delay = 0 }: { children: React.ReactNode;
   );
 }
 
-/* ─── Parallax hook ─── */
-function useParallax(speed = 0.3) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const onScroll = () => {
-      const rect = el.parentElement!.getBoundingClientRect();
-      const offset = -rect.top * speed;
-      el.style.transform = `translateY(${offset}px)`;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [speed]);
-  return ref;
-}
 
 /* ─── Staggered Word Reveal ─── */
 function WordReveal({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
@@ -255,25 +183,6 @@ function WordReveal({ text, className, style }: { text: string; className?: stri
   );
 }
 
-/* ─── Countdown Timer ─── */
-function useCountdown(targetDate: Date) {
-  const calc = useCallback(() => {
-    const diff = targetDate.getTime() - Date.now();
-    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return {
-      days: Math.floor(diff / 86400000),
-      hours: Math.floor((diff % 86400000) / 3600000),
-      minutes: Math.floor((diff % 3600000) / 60000),
-      seconds: Math.floor((diff % 60000) / 1000),
-    };
-  }, [targetDate]);
-  const [time, setTime] = useState(calc);
-  useEffect(() => {
-    const id = setInterval(() => setTime(calc()), 1000);
-    return () => clearInterval(id);
-  }, [calc]);
-  return time;
-}
 
 function CountdownTimer() {
   const target = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000 + 6 * 3600000);
@@ -308,58 +217,6 @@ function CountdownTimer() {
   );
 }
 
-/* ─── Navbar ─── */
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", h);
-    return () => window.removeEventListener("scroll", h);
-  }, []);
-  const links = ["Home", "About", "Speaker", "Register"];
-  const scrollTo = (id: string) => { document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" }); setOpen(false); };
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      style={{ background: scrolled ? "rgba(5,3,10,0.92)" : "rgba(5,3,10,0.4)", backdropFilter: "blur(20px)", borderBottom: scrolled ? "1px solid rgba(212,160,23,0.15)" : "1px solid transparent" }}>
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <button onClick={() => scrollTo("home")} className="flex items-center gap-2 group">
-          <div className="w-8 h-8 relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-500 to-red-700 opacity-80 group-hover:opacity-100 transition-opacity" />
-            <Flame className="relative w-8 h-8 text-yellow-300" />
-          </div>
-          <span className="font-['Cinzel'] font-bold text-base tracking-widest text-amber-300">DRAGONS</span>
-        </button>
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a key={l} href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer" className="font-['Plus_Jakarta_Sans'] text-sm tracking-wider text-amber-100/70 hover:text-amber-300 transition-colors duration-300 uppercase">{l}</a>
-          ))}
-          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
-            className="px-5 py-2 rounded-lg font-['Plus_Jakarta_Sans'] text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            style={{ background: "linear-gradient(135deg, #c94a1a, #e8621a)", color: "#fff", boxShadow: "0 0 20px rgba(201,74,26,0.4)" }}>
-            Register Now
-          </a>
-        </div>
-        <button onClick={() => setOpen(!open)} className="md:hidden text-amber-300">
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-      {open && (
-        <div className="md:hidden px-6 pb-6 pt-2 flex flex-col gap-4"
-          style={{ background: "rgba(5,3,10,0.97)", borderTop: "1px solid rgba(212,160,23,0.1)" }}>
-          {links.map((l) => (
-            <a key={l} href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer" className="font-['Plus_Jakarta_Sans'] text-sm tracking-wider text-amber-100/70 hover:text-amber-300 transition-colors text-left uppercase">{l}</a>
-          ))}
-          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
-            className="px-5 py-3 rounded-lg font-['Plus_Jakarta_Sans'] text-sm font-semibold tracking-wider uppercase w-full"
-            style={{ background: "linear-gradient(135deg, #c94a1a, #e8621a)", color: "#fff" }}>
-            Register Now
-          </a>
-        </div>
-      )}
-    </nav>
-  );
-}
 
 /* ─── Hero ─── */
 function Hero() {
@@ -426,11 +283,11 @@ function Hero() {
             <Flame size={18} />Reserve Your Slot
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
-          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
+          <button onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
             className="flex items-center gap-3 px-8 py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105"
             style={{ background: "rgba(212,160,23,0.1)", border: "1px solid rgba(212,160,23,0.4)", color: "#d4a017", fontSize: "0.95rem" }}>
             Learn More<ChevronDown size={16} />
-          </a>
+          </button>
         </div>
 
         <div className="mt-20 flex justify-center">
@@ -940,64 +797,6 @@ function Testimonials() {
   );
 }
 
-/* ─── Footer ─── */
-function Footer() {
-  return (
-    <footer className="relative py-16 px-6 overflow-hidden"
-      style={{ background: "#02010a", borderTop: "1px solid rgba(212,160,23,0.12)" }}>
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Flame size={24} className="text-amber-400" />
-              <span className="font-['Cinzel_Decorative'] font-bold tracking-widest text-sm" style={{ color: "#d4a017" }}>DRAGONS PROJECT</span>
-            </div>
-            <p className="font-['Cinzel'] italic text-sm mb-4" style={{ color: "rgba(240,230,211,0.5)" }}>One Team. One Vision. One Family.</p>
-            <p className="font-['Plus_Jakarta_Sans'] text-xs leading-relaxed" style={{ color: "rgba(240,230,211,0.35)" }}>
-              Empowering ordinary people to build extraordinary futures through community, education, and business.
-            </p>
-          </div>
-          <div>
-            <p className="font-['Cinzel'] font-bold text-xs tracking-widest uppercase mb-4" style={{ color: "#d4a017" }}>Follow the Movement</p>
-            <div className="space-y-2">
-              {["#DragonsProject", "#dragonsprojectbyronaldallanuy", "#WalangShortcutSaTagumpay", "#OneTeamOneVision"].map((tag) => (
-                <CopyHashtag key={tag} tag={tag} />
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="font-['Cinzel'] font-bold text-xs tracking-widest uppercase mb-4" style={{ color: "#d4a017" }}>Connect With Us</p>
-            <div className="flex gap-3 mb-6">
-              {[
-                { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/lexie.lonzkie" },
-                { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.facebook.com/lexie.lonzkie" },
-                { icon: <MessageCircle size={18} />, label: "Messenger", href: "https://www.facebook.com/lexie.lonzkie" },
-              ].map(({ icon, label, href }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-amber-400/40"
-                  style={{ background: "rgba(212,160,23,0.08)", border: "1px solid rgba(212,160,23,0.15)", color: "#d4a017" }} aria-label={label}>
-                  {icon}
-                </a>
-              ))}
-            </div>
-            <p className="font-['Plus_Jakarta_Sans'] text-xs leading-relaxed" style={{ color: "rgba(240,230,211,0.4)" }}>
-              Reach out via Messenger or WhatsApp<br />to speak with our team directly.
-            </p>
-          </div>
-        </div>
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: "1px solid rgba(212,160,23,0.08)" }}>
-          <p className="font-['Plus_Jakarta_Sans'] text-xs" style={{ color: "rgba(240,230,211,0.25)" }}>
-            © {new Date().getFullYear()} Dragons Project by Marlon M. Pilapil. All rights reserved.
-          </p>
-          <p className="font-['Cinzel'] text-xs tracking-widest italic" style={{ color: "rgba(212,160,23,0.35)" }}>
-            Walang Shortcut sa Tagumpay.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 /* ─── App ─── */
 export default function App() {
