@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Flame } from "lucide-react";
-
-const FACEBOOK_URL = "https://www.facebook.com/lexie.lonzkie";
+import { FACEBOOK_URL } from "../../config/constants";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);

@@ -13,6 +13,7 @@ import { CopyHashtag } from "../components/ui/CopyHashtag";
 import { useFadeIn } from "../hooks/useFadeIn";
 import { useParallax } from "../hooks/useParallax";
 import { useCountdown } from "../hooks/useCountdown";
+import { FACEBOOK_URL, COUNTDOWN_DAYS, COUNTDOWN_HOURS, WEBINAR_DATE, WEBINAR_TIME, WEBINAR_PLATFORM } from "../config/constants";
 
 
 /* ─── Utility ─── */
@@ -185,7 +186,7 @@ function WordReveal({ text, className, style }: { text: string; className?: stri
 
 
 function CountdownTimer() {
-  const target = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000 + 6 * 3600000);
+  const target = new Date(Date.now() + COUNTDOWN_DAYS * 24 * 60 * 60 * 1000 + COUNTDOWN_HOURS * 3600000);
   const { days, hours, minutes, seconds } = useCountdown(target);
   const units = [
     { label: "Days", value: days },
@@ -277,7 +278,7 @@ function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
+          <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer"
             className="group flex items-center gap-3 px-8 py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105"
             style={{ background: "linear-gradient(135deg, #c94a1a, #f07030)", color: "#fff", boxShadow: "0 0 30px rgba(201,74,26,0.5), 0 4px 20px rgba(0,0,0,0.4)", fontSize: "0.95rem" }}>
             <Flame size={18} />Reserve Your Slot
@@ -684,10 +685,10 @@ function Register() {
           <FadeIn delay={100}>
             <div className="space-y-4">
               {[
-                { label: "Date", value: "TBA — Watch this space", icon: <CalendarDays size={20} />, color: "#d4a017" },
-                { label: "Time", value: "TBA — Stay tuned", icon: <Clock size={20} />, color: "#c94a1a" },
+                { label: "Date", value: WEBINAR_DATE, icon: <CalendarDays size={20} />, color: "#d4a017" },
+                { label: "Time", value: WEBINAR_TIME, icon: <Clock size={20} />, color: "#c94a1a" },
                 { label: "Slots", value: "Limited — First come, first served", icon: <Zap size={20} />, color: "#f07030" },
-                { label: "Platform", value: "Online via Zoom / Facebook Live", icon: <Monitor size={20} />, color: "#4a90d9" },
+                { label: "Platform", value: WEBINAR_PLATFORM, icon: <Monitor size={20} />, color: "#4a90d9" },
               ].map(({ label, value, icon, color }) => (
                 <div key={label} className="flex items-center gap-4 p-5 rounded-2xl transition-all duration-300 hover:border-amber-400/25"
                   style={{ background: "rgba(15,8,25,0.6)", border: "1px solid rgba(212,160,23,0.12)", backdropFilter: "blur(16px)" }}>
@@ -702,12 +703,12 @@ function Register() {
                 </div>
               ))}
               <div className="pt-2 space-y-3">
-                <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
+                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #0066FF, #00A6FF)", color: "#fff", boxShadow: "0 0 20px rgba(0,102,255,0.3)" }}>
                   <MessageCircle size={18} />Message Us on Messenger
                 </a>
-                <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
+                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 w-full py-4 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #25D366, #128C7E)", color: "#fff", boxShadow: "0 0 20px rgba(37,211,102,0.3)" }}>
                   <Phone size={18} />Message Us on WhatsApp
@@ -726,7 +727,7 @@ function Register() {
                 <p className="font-['Plus_Jakarta_Sans'] text-sm leading-relaxed mb-6" style={{ color: "rgba(240,230,211,0.6)" }}>
                   Thank you for registering, <strong style={{ color: "#d4a017" }}>{form.name.split(" ")[0]}</strong>! We will reach out via your contact details with confirmation and next steps. Welcome to the Dragons family!
                 </p>
-                <a href="https://www.facebook.com/lexie.lonzkie" target="_blank" rel="noopener noreferrer"
+                <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-['Plus_Jakarta_Sans'] font-semibold tracking-wider text-sm uppercase transition-all duration-300 hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #0066FF, #00A6FF)", color: "#fff", boxShadow: "0 0 16px rgba(0,102,255,0.3)" }}>
                   <MessageCircle size={16} />Reach Out on Messenger

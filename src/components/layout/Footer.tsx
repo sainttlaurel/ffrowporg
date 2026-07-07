@@ -1,7 +1,6 @@
 import { Flame, Facebook, Instagram, MessageCircle } from "lucide-react";
 import { CopyHashtag } from "../ui/CopyHashtag";
-
-const FACEBOOK_URL = "https://www.facebook.com/lexie.lonzkie";
+import { FACEBOOK_URL } from "../../config/constants";
 
 export function Footer() {
   return (
