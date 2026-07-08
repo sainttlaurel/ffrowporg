@@ -75,13 +75,13 @@ export function About() {
                     "0 0 60px rgba(192,57,43,0.2), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
               >
-                {/* Photo — TODO: replace with an actual photo of Marlon */}
+                {/* Photo */}
                 <div className="relative w-72 md:w-80 aspect-[3/4] bg-zinc-900">
                   <img
-                    src="https://images.unsplash.com/photo-1764545973653-94c40d993495?w=640&h=854&fit=crop&auto=format&crop=faces,top"
+                    src="/marlon.png"
                     alt="Marlon M. Pilapil — Independent Dragons Project Business Partner"
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                   {/* Cinematic overlay */}
                   <div

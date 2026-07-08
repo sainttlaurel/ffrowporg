@@ -63,7 +63,7 @@ These are already complete as of the initial codebase setup.
 - [x] "Message Marlon" reads WhatsApp (`wa.me`) or Messenger URL from config — set to https://m.me/lexie.lonzkie
 - [x] Footer host name reads from config
 - [x] All links open in new tab with `rel="noopener noreferrer"` when real URLs are set
-- [ ] **TODO (owner):** Replace Unsplash About photo with real photo of Marlon
+- [x] ~~**TODO (owner):** Replace Unsplash About photo with real photo of Marlon~~ — using `/marlon.png`
 - [ ] **TODO (owner):** Fill in remaining URLs in `src/app/lib/config.ts` (Instagram, YouTube, webinar date, Formspree)
 - [ ] **TODO (owner):** Update testimonials with real partner names/quotes
 
@@ -197,4 +197,4 @@ These improvements have been added to enhance UX and prepare for analytics.
 
 https://www.facebook.com/lexie.lonzkie
 https://www.facebook.com/lexie.lonzkie
-https://www.facebook.com/lexie.lonzkie
+https://www.facebook.com/lexie.lonzkiew
