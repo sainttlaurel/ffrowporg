@@ -2,29 +2,29 @@
 
 :root {
   --font-size: 16px;
-  --background: #05030a;
-  --foreground: #f0e6d3;
-  --card: rgba(15, 8, 25, 0.7);
-  --card-foreground: #f0e6d3;
-  --popover: #0d0618;
-  --popover-foreground: #f0e6d3;
-  --primary: #c94a1a;
+  --background: #080808;
+  --foreground: #f5f0e8;
+  --card: #111111;
+  --card-foreground: #f5f0e8;
+  --popover: #111111;
+  --popover-foreground: #f5f0e8;
+  --primary: #c0392b;
   --primary-foreground: #ffffff;
-  --secondary: #1a0d2e;
-  --secondary-foreground: #f0e6d3;
-  --muted: #120a20;
-  --muted-foreground: #9a8a6a;
-  --accent: #d4a017;
-  --accent-foreground: #05030a;
-  --destructive: #d4183d;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f5f0e8;
+  --muted: #1e1e1e;
+  --muted-foreground: #8a8070;
+  --accent: #d4870a;
+  --accent-foreground: #080808;
+  --destructive: #c0392b;
   --destructive-foreground: #ffffff;
-  --border: rgba(212, 160, 23, 0.18);
-  --input: rgba(255,255,255,0.06);
-  --input-background: rgba(255,255,255,0.06);
-  --switch-background: #3a2050;
+  --border: rgba(200, 80, 30, 0.18);
+  --input: #1a1a1a;
+  --input-background: #1a1a1a;
+  --switch-background: #333333;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #d4a017;
+  --ring: #c0392b;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -42,25 +42,25 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --background: #080808;
+  --foreground: #f5f0e8;
+  --card: #111111;
+  --card-foreground: #f5f0e8;
+  --popover: #111111;
+  --popover-foreground: #f5f0e8;
+  --primary: #c0392b;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f5f0e8;
+  --muted: #1e1e1e;
+  --muted-foreground: #8a8070;
+  --accent: #d4870a;
+  --accent-foreground: #080808;
+  --destructive: #c0392b;
+  --destructive-foreground: #ffffff;
+  --border: rgba(200, 80, 30, 0.18);
+  --input: #1a1a1a;
+  --ring: #c0392b;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --chart-1: oklch(0.488 0.243 264.376);
@@ -177,5 +177,36 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+
+  /* Visible focus ring for keyboard navigation — meets WCAG 2.1 SC 2.4.11 */
+  :focus-visible {
+    outline: 2px solid #d4870a;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Screen-reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .sr-only.focus\:not-sr-only:focus,
+  .focus\:not-sr-only:focus {
+    position: fixed;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
   }
 }
