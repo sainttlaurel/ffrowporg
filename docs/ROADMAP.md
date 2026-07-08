@@ -76,7 +76,7 @@ These are already complete as of the initial codebase setup.
 - [x] `theme-color` meta added for mobile browser chrome
 - [x] Emoji favicon placeholder added
 - [ ] **TODO (owner):** Replace `og:image` and favicon with real branded assets
-- [ ] **TODO (owner):** Update `og:url` with real domain once deployed
+- [x] ~~**TODO (owner):** Update `og:url` with real domain once deployed~~ — updated to https://ffrowporg.vercel.app
 
 ---
 
@@ -123,21 +123,21 @@ These are already complete as of the initial codebase setup.
 
 ---
 
-## Phase 3 — GitHub & Vercel Deployment 📋
+## Phase 3 — GitHub & Vercel Deployment ✅
 
 *(Do this after Phase 1 is complete and the page has real content.)*
 
 ### 3.1 GitHub Setup
-- [ ] Create a GitHub repository (`dragonproject` or similar)
-- [ ] Set up `.gitignore` (node_modules, .env, dist)
-- [ ] Create initial commit with clean codebase~
+- [x] Create a GitHub repository (`dragonproject` or similar)
+- [x] Set up `.gitignore` (node_modules, .env, dist)
+- [x] Create initial commit with clean codebase
 - [ ] Set up branch protection on `main`
 
 ### 3.2 Vercel Setup
-- [ ] Connect Vercel to the GitHub repository
-- [ ] Configure build settings: framework = Vite, build command = `pnpm build`, output = `dist`
+- [x] Connect Vercel to the GitHub repository
+- [x] Configure build settings: framework = Vite, build command = `pnpm build`, output = `dist`
 - [ ] Set up custom domain (if available)
-- [ ] Verify production deployment
+- [x] Verify production deployment — live at https://ffrowporg.vercel.app/
 
 ### 3.3 CI/CD
 - [ ] Add a GitHub Actions workflow for basic checks (TypeScript `tsc --noEmit`, lint) on pull requests

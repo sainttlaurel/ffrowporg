@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import { useRef, useState, useCallback } from "react";
 
 export interface Testimonial {
   name: string;
@@ -98,10 +99,60 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-/** Infinite auto-scrolling marquee of testimonial cards. */
+/** Infinite auto-scrolling marquee with touch/mouse drag support. */
 export function Testimonials() {
-  // Double the array so the marquee loop is seamless
-  const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
+  // Triple the array so wrapping stays seamless even after large drags
+  const doubled = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const dragStart = useRef<{ x: number; scrollLeft: number } | null>(null);
+
+  // Pause auto-scroll on hover (desktop)
+  const handleMouseEnter = useCallback(() => setIsPaused(true), []);
+  const handleMouseLeave = useCallback(() => {
+    if (!isDragging) setIsPaused(false);
+  }, [isDragging]);
+
+  // Pointer down — start drag
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    const track = trackRef.current;
+    if (!track) return;
+    setIsDragging(true);
+    setIsPaused(true);
+    dragStart.current = { x: e.clientX, scrollLeft: track.scrollLeft };
+    track.setPointerCapture(e.pointerId);
+    track.style.cursor = "grabbing";
+  }, []);
+
+  // Pointer move — scroll the container
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging || !dragStart.current) return;
+      const track = trackRef.current;
+      if (!track) return;
+      const dx = e.clientX - dragStart.current.x;
+      track.scrollLeft = dragStart.current.scrollLeft - dx;
+    },
+    [isDragging]
+  );
+
+  // Pointer up — end drag
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging) return;
+      setIsDragging(false);
+      setIsPaused(false);
+      dragStart.current = null;
+      const track = trackRef.current;
+      if (track) {
+        track.releasePointerCapture(e.pointerId);
+        track.style.cursor = "grab";
+      }
+    },
+    [isDragging]
+  );
 
   return (
     <section
@@ -136,13 +187,30 @@ export function Testimonials() {
         Voices from our growing community
       </p>
 
+      {/*
+        Outer div: clips overflow, handles pointer events.
+        Inner div: the scrollable track — CSS marquee runs on it,
+        paused while dragging via animation-play-state.
+      */}
       <div
-        className="flex marquee-track w-max"
-        aria-label="Testimonials carousel"
+        className="overflow-hidden select-none"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        style={{ cursor: isDragging ? "grabbing" : "grab", touchAction: "pan-y" }}
+        aria-label="Testimonials carousel — drag or swipe to browse"
       >
-        {doubled.map((t, i) => (
-          <TestimonialCard key={i} t={t} />
-        ))}
+        <div
+          ref={trackRef}
+          className={`flex w-max ${isPaused ? "" : "marquee-track"}`}
+        >
+          {doubled.map((t, i) => (
+            <TestimonialCard key={i} t={t} />
+          ))}
+        </div>
       </div>
     </section>
   );
