@@ -31,7 +31,7 @@ export const SITE_CONFIG = {
   whatsappNumber: "",
 
   /** Facebook page URL */
-  facebookUrl: "#",
+  facebookUrl: "https://www.facebook.com/lexie.lonzkie",
 
   /** Instagram profile URL */
   instagramUrl: "#",
@@ -40,7 +40,7 @@ export const SITE_CONFIG = {
   youtubeUrl: "#",
 
   /** Messenger link (m.me/username) */
-  messengerUrl: "#",
+  messengerUrl: "https://m.me/lexie.lonzkie",
 
   /**
    * YouTube or Facebook video embed URL for the intro video section.

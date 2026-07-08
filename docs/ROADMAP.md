@@ -60,11 +60,11 @@ These are already complete as of the initial codebase setup.
 
 ### 1.3 Real Content ✅
 - [x] Social links (Facebook, Instagram, YouTube) read from `src/app/lib/config.ts`
-- [x] "Message Marlon" reads WhatsApp (`wa.me`) or Messenger URL from config
+- [x] "Message Marlon" reads WhatsApp (`wa.me`) or Messenger URL from config — set to https://m.me/lexie.lonzkie
 - [x] Footer host name reads from config
 - [x] All links open in new tab with `rel="noopener noreferrer"` when real URLs are set
 - [ ] **TODO (owner):** Replace Unsplash About photo with real photo of Marlon
-- [ ] **TODO (owner):** Fill in real URLs in `src/app/lib/config.ts`
+- [ ] **TODO (owner):** Fill in remaining URLs in `src/app/lib/config.ts` (Instagram, YouTube, webinar date, Formspree)
 - [ ] **TODO (owner):** Update testimonials with real partner names/quotes
 
 ### 1.4 SEO & Meta Tags ✅
@@ -191,3 +191,10 @@ These improvements have been added to enhance UX and prepare for analytics.
 | 🟠 Low | No `tsconfig.json` — no type checking | 📋 Phase 4.5 |
 | 🟠 Low | MUI and other unused packages inflate node_modules | 📋 Phase 2.2 |
 | 🟠 Low | `react`/`react-dom` listed as optional peerDeps (should be deps) | 💡 Phase 4.5 |
+
+
+---
+
+https://www.facebook.com/lexie.lonzkie
+https://www.facebook.com/lexie.lonzkie
+https://www.facebook.com/lexie.lonzkie
