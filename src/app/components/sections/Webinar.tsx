@@ -7,6 +7,7 @@ import {
   Flame,
   Shield,
   Zap,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { useReveal } from "@/app/hooks/useReveal";
@@ -31,20 +32,13 @@ function getDetails(): DetailItem[] {
       })
     : "To Be Announced";
 
-  const timeLabel = SITE_CONFIG.webinarDate
-    ? new Date(SITE_CONFIG.webinarDate).toLocaleTimeString("en-PH", {
-        hour: "2-digit",
-        minute: "2-digit",
-        timeZoneName: "short",
-      })
-    : "To Be Announced";
-
   return [
     { icon: Calendar, label: "Date", value: dateLabel },
-    { icon: Clock, label: "Time", value: timeLabel },
+    { icon: Clock, label: "Schedule (PHT)", value: "1:00 PM · 5:00 PM · 8:00 PM · 10:00 PM" },
     { icon: Monitor, label: "Platform", value: SITE_CONFIG.platform },
-    { icon: Gift, label: "Investment", value: "Completely Free" },
-    { icon: AlertCircle, label: "Availability", value: "Limited Seats Only" },
+    { icon: Gift, label: "Cost", value: "Free Attendance" },
+    { icon: Shield, label: "Eligibility", value: "18 years old and above only" },
+    { icon: AlertCircle, label: "Availability", value: "Open to all countries" },
   ];
 }
 
@@ -77,7 +71,7 @@ export function Webinar() {
         <SectionHeading
           eyebrow="Save Your Seat"
           title="Webinar Details"
-          sub="A free, high-impact session designed to shift your perspective and set you into motion."
+          sub="A free, high-impact online session open to all countries. 18 years old and above only."
         />
 
         <div
@@ -121,6 +115,34 @@ export function Webinar() {
               >
                 Event Information
               </p>
+
+              {/* Speaker */}
+              <div className="mb-5 flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(192,57,43,0.2), rgba(212,135,10,0.12))",
+                    border: "1px solid rgba(192,57,43,0.25)",
+                  }}
+                >
+                  <Users className="w-4 h-4 text-amber-400" />
+                </div>
+                <div>
+                  <p
+                    className="text-[10px] text-muted-foreground uppercase tracking-widest"
+                    style={{ fontFamily: "'Oswald', sans-serif" }}
+                  >
+                    Speaker
+                  </p>
+                  <p
+                    className="text-sm font-semibold text-foreground mt-0.5"
+                    style={{ fontFamily: "'Raleway', sans-serif" }}
+                  >
+                    Sir Mark Anthony Cruz
+                  </p>
+                </div>
+              </div>
               <div className="space-y-5">
                 {details.map(({ icon: Icon, label, value }) => (
                   <div key={label} className="flex items-center gap-4 group">
@@ -160,9 +182,9 @@ export function Webinar() {
                   style={{ fontFamily: "'Raleway', sans-serif" }}
                 >
                   <span className="font-bold text-red-300">
-                    Slots filling fast.
+                    Secure your slot now.
                   </span>{" "}
-                  Register early to guarantee your place.
+                  Comment your country + "DRAGONS" to receive the details, or send a direct message for more information.
                 </p>
               </div>
             </div>

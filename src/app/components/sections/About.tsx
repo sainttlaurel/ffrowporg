@@ -47,7 +47,7 @@ export function About() {
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeading
           eyebrow="Your Host"
-          title="About Marlon M. Pilapil"
+          title="About Sir Mark Anthony Cruz"
           sub="The man behind the invitation — and the mission."
         />
 
@@ -79,7 +79,7 @@ export function About() {
                 <div className="relative w-72 md:w-80 aspect-[3/4] bg-zinc-900">
                   <img
                     src="/marlon.png"
-                    alt="Marlon M. Pilapil — Independent Dragons Project Business Partner"
+                    alt="Sir Mark Anthony Cruz — Dragons Project Speaker"
                     loading="lazy"
                     className="w-full h-full object-cover object-top"
                   />
@@ -98,7 +98,7 @@ export function About() {
                       className="text-white font-black text-xl leading-tight"
                       style={{ fontFamily: "'Cinzel', serif" }}
                     >
-                      Marlon M. Pilapil
+                      Sir Mark Anthony Cruz
                     </p>
                     <div className="mt-1 flex items-center gap-2">
                       <div className="h-px flex-1 bg-gradient-to-r from-amber-500 to-transparent" />
@@ -157,15 +157,15 @@ export function About() {
               style={{ fontFamily: "'Raleway', sans-serif" }}
             >
               <p className="text-foreground/90 text-lg leading-relaxed">
-                Marlon M. Pilapil is a passionate entrepreneur, financial
+                Sir Mark Anthony Cruz is a passionate entrepreneur, financial
                 educator, and community builder committed to helping ordinary
                 people unlock extraordinary results.
               </p>
               <p>
-                As an Independent Business Partner of the Dragons Project, he
-                has personally guided dozens of individuals — many starting from
-                zero — through the journey of entrepreneurship, financial
-                literacy, and personal leadership.
+                As a key figure in the Dragons Project, he has personally guided
+                dozens of individuals — many starting from zero — through the
+                journey of entrepreneurship, financial literacy, and personal
+                leadership.
               </p>
               <p>
                 His approach is direct, practical, and deeply human. He doesn't

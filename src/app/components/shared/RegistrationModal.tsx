@@ -295,7 +295,7 @@ export function RegistrationModal({ open, onClose }: RegistrationModalProps) {
                 <div className="flex items-center gap-2 px-4 py-3 rounded-xl border border-red-900/40 bg-red-950/20">
                   <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
                   <p className="text-xs text-red-300" style={{ fontFamily: "'Raleway', sans-serif" }}>
-                    Something went wrong. Please try again or message Marlon directly.
+                    Something went wrong. Please try again or send a direct message for assistance.
                   </p>
                 </div>
               )}

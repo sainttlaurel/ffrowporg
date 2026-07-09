@@ -5,7 +5,7 @@
 
 export const SITE_CONFIG = {
   /** Webinar host full name */
-  hostName: "Marlon M. Pilapil",
+  hostName: "Sir Mark Anthony Cruz",
 
   /**
    * Webinar date/time (ISO 8601).

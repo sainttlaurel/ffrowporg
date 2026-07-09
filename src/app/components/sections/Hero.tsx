@@ -93,7 +93,7 @@ export function Hero() {
           className="hero-fade d1 text-[11px] uppercase tracking-[0.5em] text-red-400/80 mb-4"
           style={{ fontFamily: "'Oswald', sans-serif" }}
         >
-          Presented by Marlon M. Pilapil · Independent Business Partner
+          Presented by Sir Mark Anthony Cruz · Dragons Project
         </p>
 
         {/* Main title */}
@@ -155,7 +155,7 @@ export function Hero() {
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full text-[13px] font-bold uppercase tracking-[0.2em] text-white/80 border border-white/20 hover:border-amber-500/60 hover:text-amber-300 backdrop-blur-sm transition-all duration-300 hover:scale-105"
             style={{ fontFamily: "'Oswald', sans-serif" }}
           >
-            <MessageCircle className="w-4 h-4" /> Message Marlon
+            <MessageCircle className="w-4 h-4" /> Send a Direct Message
           </a>
         </div>
 

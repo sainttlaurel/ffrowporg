@@ -108,7 +108,7 @@ export function FinalCTA() {
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-5 rounded-full text-[13px] font-bold uppercase tracking-[0.2em] text-white/70 border border-white/15 hover:border-amber-500/50 hover:text-amber-300 transition-all duration-300"
             style={{ fontFamily: "'Oswald', sans-serif" }}
           >
-            <MessageCircle className="w-4 h-4" /> Ask Marlon Directly
+            <MessageCircle className="w-4 h-4" /> Send a Direct Message
           </a>
         </div>
 
