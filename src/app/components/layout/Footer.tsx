@@ -1,4 +1,4 @@
-import { Flame, Facebook, Instagram, Youtube, ArrowUp } from "lucide-react";
+import { Facebook, Instagram, Youtube, ArrowUp, Flame } from "lucide-react";
 import { Divider } from "@/app/components/shared/Divider";
 import { scrollTo } from "@/app/lib/utils";
 import { SITE_CONFIG } from "@/app/lib/config";
@@ -21,13 +21,11 @@ export function Footer() {
           {/* Brand */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2.5 mb-3">
-              <div className="relative w-9 h-9">
-                <div
-                  className="absolute inset-0 rounded-full bg-gradient-to-br from-red-700 to-amber-600"
-                  style={{ boxShadow: "0 0 16px rgba(192,57,43,0.5)" }}
-                />
-                <Flame className="absolute inset-0 m-auto w-4 h-4 text-white" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Dragons Project"
+                className="h-9 w-auto object-contain"
+              />
               <div>
                 <div
                   className="text-white font-black tracking-[0.15em] text-sm uppercase"
@@ -43,14 +41,6 @@ export function Footer() {
                 </div>
               </div>
             </div>
-            <p
-              className="text-xs text-muted-foreground max-w-xs"
-              style={{ fontFamily: "'Raleway', sans-serif" }}
-            >
-              Presented by {SITE_CONFIG.hostName}
-              <br />
-              Independent Business Partner
-            </p>
           </div>
 
           {/* Nav shortcuts */}

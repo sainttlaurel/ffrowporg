@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Flame, Zap } from "lucide-react";
+import { Menu, X, Zap } from "lucide-react";
 import { scrollTo } from "@/app/lib/utils";
 import { useRegistration } from "@/app/context/RegistrationContext";
 
@@ -37,13 +37,11 @@ export function Navbar() {
           className="flex items-center gap-2.5 group"
           aria-label="Go to top"
         >
-          <div className="relative w-9 h-9">
-            <div
-              className="absolute inset-0 rounded-full bg-gradient-to-br from-red-700 to-amber-600 group-hover:scale-110 transition-transform duration-300"
-              style={{ boxShadow: "0 0 16px rgba(192,57,43,0.6)" }}
-            />
-            <Flame className="absolute inset-0 m-auto w-4 h-4 text-white" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="Dragons Project"
+            className="h-9 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+          />
           <div>
             <div
               className="text-foreground font-black tracking-[0.15em] text-sm uppercase leading-none"
