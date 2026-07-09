@@ -20,14 +20,16 @@ export function SectionHeading({
 
   return (
     <div ref={ref} className="text-center mb-16">
-      <p
-        className={`text-[11px] uppercase tracking-[0.4em] mb-3 font-bold ${
-          light ? "text-amber-400" : "text-amber-500"
-        } ${visible ? "reveal-up" : "opacity-0"}`}
-        style={{ fontFamily: "'Oswald', sans-serif" }}
-      >
-        {eyebrow}
-      </p>
+      {eyebrow && (
+        <p
+          className={`text-[11px] uppercase tracking-[0.4em] mb-3 font-bold ${
+            light ? "text-amber-400" : "text-amber-500"
+          } ${visible ? "reveal-up" : "opacity-0"}`}
+          style={{ fontFamily: "'Oswald', sans-serif" }}
+        >
+          {eyebrow}
+        </p>
+      )}
       <h2
         className={`text-4xl md:text-5xl font-black leading-[1.1] mb-2 ${
           light ? "text-white" : "text-foreground"

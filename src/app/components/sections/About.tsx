@@ -46,7 +46,7 @@ export function About() {
 
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeading
-          eyebrow="Your Host"
+          eyebrow=""
           title="About Sir Mark Anthony Cruz"
           sub="The man behind the invitation — and the mission."
         />
@@ -133,17 +133,7 @@ export function About() {
                 </div>
               </div>
 
-              {/* Floating badge */}
-              <div
-                className="absolute -top-3 -right-3 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-white float-y"
-                style={{
-                  background: "linear-gradient(135deg, #c0392b, #d4870a)",
-                  fontFamily: "'Oswald', sans-serif",
-                  boxShadow: "0 0 20px rgba(192,57,43,0.5)",
-                }}
-              >
-                ✦ Live Host
-              </div>
+              {/* Floating badge removed */}
             </div>
           </div>
 
