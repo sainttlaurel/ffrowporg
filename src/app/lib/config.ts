@@ -13,17 +13,21 @@ export const SITE_CONFIG = {
    * Example: "2025-09-15T14:00:00+08:00"  (2 PM Philippine Time)
    * Set to null to show "To Be Announced" instead of the countdown.
    */
-  webinarDate: null as string | null,
+  webinarDate: "2026-07-20T13:00:00+08:00",
 
   /** Webinar platform display label */
   platform: "Zoom / Google Meet",
 
   /**
-   * Formspree form endpoint.
-   * 1. Go to https://formspree.io and create a free account.
-   * 2. Create a new form → copy the endpoint (e.g. "https://formspree.io/f/abcdefgh").
-   * 3. Paste it here.
-   * Leave as empty string to use the fallback mailto link.
+   * Google Form URL for webinar registration.
+   * Opens in a new tab when the user clicks "Reserve My Spot".
+   * Set to empty string "" to fall back to the built-in form + Formspree.
+   */
+  googleFormUrl: "https://forms.gle/XES68JpqSYjioFb49",
+
+  /**
+   * Formspree form endpoint (fallback if googleFormUrl is empty).
+   * Leave as empty string to use the mailto fallback.
    */
   formspreeEndpoint: "",
 
