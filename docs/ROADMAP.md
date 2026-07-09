@@ -1,7 +1,9 @@
 # Dragons Project — Website Roadmap
 
-> Deployment target: **GitHub + Vercel**  
-> Workflow: **Code → Test Run → GitHub → Vercel auto-deploy**
+> Deployment target: **GitHub + Vercel**
+> Live URL: **https://ffrowporg.vercel.app**
+> GitHub: **https://github.com/sainttlaurel/ffrowporg**
+> Workflow: **Code → Build check → GitHub push → Vercel auto-deploy**
 
 ---
 
@@ -9,16 +11,15 @@
 
 | Status | Meaning |
 |--------|---------|
-| ✅ Done | Implemented and test-run verified |
+| ✅ Done | Implemented and verified |
 | 🔨 In Progress | Currently being built |
 | 📋 Planned | Scoped, not started |
-| 💡 Idea | Suggested improvement, not yet committed |
+| 💡 Idea | Suggested, not committed |
+| ⏳ Owner | Needs content/action from site owner |
 
 ---
 
 ## Phase 0 — Foundation & Cleanup ✅
-
-These are already complete as of the initial codebase setup.
 
 - [x] Project scaffolded with Vite + React + TypeScript + Tailwind v4
 - [x] shadcn/ui component library installed
@@ -30,171 +31,153 @@ These are already complete as of the initial codebase setup.
 - [x] Ember particle animation
 - [x] Scroll-reveal (IntersectionObserver) for sections
 - [x] Infinite marquee testimonials
-- [x] **Code organisation** — split monolithic App.tsx into per-section components
-- [x] **Bug fix** — React Rules of Hooks violation in FAQ (useReveal inside .map)
-- [x] **File cleanup** — removed empty globals.css, moved default_shadcn_theme.css to docs/
-- [x] RULES.md and roadmap.md created
+- [x] Split monolithic App.tsx into per-section components
+- [x] Bug fix — React Rules of Hooks violation in FAQ (useReveal inside .map)
+- [x] File cleanup — removed empty globals.css, moved default_shadcn_theme.css to docs/
+- [x] RULES.md and ROADMAP.md created
 
 ---
 
 ## Phase 1 — Core Functionality ✅
 
 ### 1.1 Registration Flow ✅
-- [x] Registration modal built (name, email, phone fields)
-- [x] All "Reserve Your Slot / Spot" buttons across Hero, Navbar, Webinar, FinalCTA now open the modal
-- [x] Client-side form validation (required fields, email format, phone format)
+- [x] Registration modal (name, email, phone fields)
+- [x] All "Reserve Your Slot / Spot" buttons open the modal (Hero, Navbar, Webinar, FinalCTA)
+- [x] Client-side validation (required fields, email format, phone format)
 - [x] Formspree backend integration — set `formspreeEndpoint` in `src/app/lib/config.ts`
 - [x] Fallback to `mailto:` when no endpoint is configured
-- [x] Success state: confirmation message
-- [x] Error state: clear error feedback with retry
-- [x] Loading spinner during submission
-- [x] Global state via `RegistrationContext` — no prop drilling
+- [x] Success / error / loading states
 
 ### 1.2 Webinar Date & Time ✅
-- [x] `CountdownTimer` component built — days / hours / mins / secs
+- [x] `CountdownTimer` component — days / hours / mins / secs
 - [x] Auto-shows "Webinar is Live!" when target time is reached
 - [x] Auto-shows "Session has ended" after the 2-hour window
 - [x] Shows "Date to be announced" badge when date is null
 - [x] Set `webinarDate` in `src/app/lib/config.ts` to activate the countdown
-- [x] Webinar section date/time labels now auto-format from `config.ts`
 
-### 1.3 Real Content ✅
-- [x] Social links (Facebook, Instagram, YouTube) read from `src/app/lib/config.ts`
-- [x] "Message Marlon" reads WhatsApp (`wa.me`) or Messenger URL from config — set to https://m.me/lexie.lonzkie
+### 1.3 Real Content — Partial ⏳
+- [x] Social and contact links read from `src/app/lib/config.ts`
+- [x] "Message Marlon" — set to `https://m.me/lexie.lonzkie` (Facebook Messenger)
+- [x] Facebook URL — set to `https://www.facebook.com/lexie.lonzkie`
 - [x] Footer host name reads from config
-- [x] All links open in new tab with `rel="noopener noreferrer"` when real URLs are set
-- [x] ~~**TODO (owner):** Replace Unsplash About photo with real photo of Marlon~~ — using `/marlon.png`
-- [ ] **TODO (owner):** Fill in remaining URLs in `src/app/lib/config.ts` (Instagram, YouTube, webinar date, Formspree)
-- [ ] **TODO (owner):** Update testimonials with real partner names/quotes
+- [x] All external links open in new tab with `rel="noopener noreferrer"`
+- [x] About photo — replaced Unsplash stock with real photo (`/marlon.png`)
+- [ ] ⏳ Set `instagramUrl` in `config.ts` — Instagram profile URL
+- [ ] ⏳ Set `youtubeUrl` in `config.ts` — YouTube channel URL
+- [ ] ⏳ Set `webinarDate` in `config.ts` — confirmed date/time (ISO 8601, PHT)
+- [ ] ⏳ Set `formspreeEndpoint` in `config.ts` — so registration emails actually send
+- [ ] ⏳ Update testimonials with real partner names and quotes
+- [ ] ⏳ Replace `og:image` with a real 1200×630 branded cover image
+- [ ] ⏳ Replace 🔥 emoji favicon with a real branded icon
 
 ### 1.4 SEO & Meta Tags ✅
-- [x] `noindex, nofollow` removed — page is now indexable by Google
-- [x] `<title>` updated: "Dragons Project Free Webinar — Reserve Your Seat Today"
-- [x] `<meta name="description">` updated with real copy
-- [x] Full Open Graph tags added (og:title, og:description, og:image, og:url, og:locale)
-- [x] Twitter Card tags added
-- [x] `theme-color` meta added for mobile browser chrome
-- [x] Emoji favicon placeholder added
-- [ ] **TODO (owner):** Replace `og:image` and favicon with real branded assets
-- [x] ~~**TODO (owner):** Update `og:url` with real domain once deployed~~ — updated to https://ffrowporg.vercel.app
+- [x] `noindex, nofollow` removed — page is indexable
+- [x] `<title>` and `<meta name="description">` updated
+- [x] Open Graph tags (og:title, og:description, og:image, og:url, og:locale)
+- [x] Twitter Card tags
+- [x] `theme-color` meta for mobile browser chrome
+- [x] `og:url` updated to `https://ffrowporg.vercel.app`
+- [x] JSON-LD Event structured data (Google rich results)
+- [x] `<link rel="preconnect">` for Google Fonts CDN
 
 ---
 
 ## Phase 2 — SEO & Performance ✅
 
 ### 2.1 SEO
-- [x] ~~`noindex, nofollow` removed~~ (done in Phase 1)
-- [x] ~~Title and description updated~~ (done in Phase 1)
-- [x] ~~Open Graph and Twitter Card tags~~ (done in Phase 1)
-- [x] JSON-LD Event structured data added to `index.html` (Google Search rich results)
-- [x] `<link rel="preconnect">` added for Google Fonts CDN (faster font loading)
-- [ ] Add `sitemap.xml` — needed once deployed on a real domain
+- [x] JSON-LD Event schema in `index.html`
+- [x] Preconnect hints for Google Fonts
+- [ ] 📋 Add `sitemap.xml` once a custom domain is confirmed
 
-### 2.2 Performance ✅
-- [x] `loading="lazy"` added to all below-the-fold images (About texture, About portrait, Webinar bg, FinalCTA bg)
-- [x] Hero image stays `eager` — it is above the fold and must load immediately
-- [x] `<link rel="preconnect">` for `fonts.googleapis.com` and `fonts.gstatic.com` in `index.html`
-- [ ] Replace Unsplash URLs with locally optimised images (WebP, <200 KB) — pending real assets
-- [ ] Self-host Google Fonts — optional improvement, CDN is fine for now
-- [ ] Audit and remove unused npm packages (MUI, react-slick, etc.) — Phase 4.5
+### 2.2 Performance
+- [x] `loading="lazy"` on all below-the-fold images
+- [x] Hero image set to `eager` (above the fold)
+- [x] Preconnect for `fonts.googleapis.com` and `fonts.gstatic.com`
+- [x] Removed 14 unused npm packages (MUI, react-slick, react-dnd, canvas-confetti, etc.)
+- [ ] ⏳ Replace remaining Unsplash background URLs with local/optimised images (WebP, <200 KB)
 
 ### 2.3 Accessibility ✅
-- [x] Skip-to-content link added — keyboard users can jump past the navbar
-- [x] `role="main"` and `id="main-content"` on the `<main>` element
-- [x] `focus-visible` outline added globally (amber, 2px, meets WCAG 2.1 SC 2.4.11)
-- [x] `prefers-reduced-motion` — all decorative animations (shimmer, pulse-ring, float, marquee, reveal) disabled when user prefers reduced motion
-- [x] Ember particles fully suppressed when `prefers-reduced-motion` is active
-- [x] All decorative images have `alt=""` and `aria-hidden="true"`
-- [x] All interactive `<button>` elements have visible text or `aria-label`
+- [x] Skip-to-content link for keyboard users
+- [x] `role="main"` and `id="main-content"` on `<main>`
+- [x] `focus-visible` outline globally (amber, 2px, WCAG 2.1 SC 2.4.11)
+- [x] `prefers-reduced-motion` — all decorative animations disabled
+- [x] Ember particles suppressed when reduced motion is active
+- [x] Decorative images have `alt=""` and `aria-hidden="true"`
+- [x] All buttons have visible text or `aria-label`
 - [x] Modal has `role="dialog"`, `aria-modal="true"`, `aria-label`
 - [x] FAQ accordion buttons have `aria-expanded`
-- [ ] Full screen-reader test — manual step, requires assistive technology
-- [ ] Replace all Unsplash URLs with locally optimised images (WebP, <200 KB each)
-- [ ] Add `loading="lazy"` to below-the-fold images
-- [ ] Self-host Google Fonts instead of loading from CDN (improves LCP)
-- [ ] Add `<link rel="preconnect">` for font origins
-- [ ] Audit and remove completely unused npm packages (MUI, react-slick, react-responsive-masonry, etc.)
-
-### 2.3 Accessibility
-- [ ] Audit full keyboard navigation (tab order, focus indicators)
-- [ ] Ensure colour contrast meets WCAG AA minimum (4.5:1 for normal text)
-- [ ] Add `role="main"` and landmark regions
-- [ ] Test with a screen reader
+- [ ] 💡 Full screen-reader test (manual, requires assistive technology)
+- [ ] 💡 Audit colour contrast — confirm WCAG AA (4.5:1) across all text
 
 ---
 
-## Phase 3 — GitHub & Vercel Deployment ✅
+## Phase 3 — Deployment ✅
 
-*(Do this after Phase 1 is complete and the page has real content.)*
+### 3.1 GitHub
+- [x] Repository created: `https://github.com/sainttlaurel/ffrowporg`
+- [x] `.gitignore` configured (node_modules, .env, dist)
+- [x] Initial commit pushed
+- [ ] 📋 Set up branch protection on `main`
 
-### 3.1 GitHub Setup
-- [x] Create a GitHub repository (`dragonproject` or similar)
-- [x] Set up `.gitignore` (node_modules, .env, dist)
-- [x] Create initial commit with clean codebase
-- [ ] Set up branch protection on `main`
-
-### 3.2 Vercel Setup
-- [x] Connect Vercel to the GitHub repository
-- [x] Configure build settings: framework = Vite, build command = `pnpm build`, output = `dist`
-- [ ] Set up custom domain (if available)
-- [x] Verify production deployment — live at https://ffrowporg.vercel.app/
+### 3.2 Vercel
+- [x] Connected to GitHub repository
+- [x] Build settings: Vite, `pnpm build`, output `dist`
+- [x] Production deployment live: `https://ffrowporg.vercel.app`
+- [ ] ⏳ Set up custom domain (if available)
 
 ### 3.3 CI/CD
-- [ ] Add a GitHub Actions workflow for basic checks (TypeScript `tsc --noEmit`, lint) on pull requests
+- [ ] 📋 GitHub Actions workflow — `tsc --noEmit` + lint on pull requests
 
 ---
 
 ## Phase 4 — Enhanced Features ✅
 
-These improvements have been added to enhance UX and prepare for analytics.
+### 4.1 Analytics ✅
+- [x] Vercel Analytics (`@vercel/analytics@1.5.0`) — auto-activates on Vercel deploy
 
-### 4.1 TypeScript Config 📋
-- [ ] Add `tsconfig.json` with `strict: true`, path alias `@/*` pointing to `src/`
-- [ ] Run `tsc --noEmit` as part of the test-run workflow to catch type errors
+### 4.2 UX Improvements ✅
+- [x] Floating sticky "Reserve Slot" button — appears after hero, hides near footer
+- [x] "Back to Top" button in footer
+- [x] Touch/drag support on testimonials marquee (fixes mobile swipe)
+- [x] Auto-pause marquee on hover (desktop)
 
-### 4.2 Analytics ✅
-- [x] Vercel Analytics installed (`@vercel/analytics@1.5.0`) — auto-activates on Vercel deploy
-- [ ] Track CTA button clicks (registration attempts) with a simple event log — Phase 5 if needed
+### 4.3 Additional Sections
+- [x] Video embed section (`VideoIntro`) — hidden automatically when `introVideoUrl` is empty
+- [x] Live chat widget — Tawk.to via `useTawkto` hook; activates when `tawktoWidgetId` is set
+- [ ] ⏳ Gallery / Highlights — needs real event photos/clips
+- [ ] ⏳ Partners / Logos strip — needs real credibility logos
 
-### 4.3 Additional Sections (Optional) ✅
-- [ ] **Gallery / Highlights** — photos/clips from past events (needs real assets — owner action)
-- [ ] **Partners / Logos strip** — credibility logos if applicable (needs real assets — owner action)
-- [x] **Video embed** — `VideoIntro` section built; wired to `config.ts` (`introVideoUrl`); hidden automatically when URL is empty
-- [x] **Live chat widget** — Tawk.to integration built via `useTawkto` hook; wired to `config.ts` (`tawktoWidgetId`); zero-cost, activates when ID is set
-
-### 4.4 UX Improvements ✅
-- [x] Floating sticky "Reserve Slot" button — appears after scrolling past hero, hides near page bottom
-- [x] "Back to Top" button in the footer — smooth scroll to #home
-- [x] Reduced motion support — already done in Phase 2
-- [ ] Page loading skeleton or progress bar — optional improvement
-
-### 4.5 Codebase Health ✅
-- [x] Removed 14 unused packages (MUI, react-slick, react-dnd, motion, canvas-confetti, etc.) — 80 sub-packages removed
-- [x] Fixed `react`/`react-dom` moved from `peerDependencies` (optional) to `dependencies` (correct for an app)
-- [ ] Set up ESLint + Prettier configs — Phase 5 if needed
-- [ ] Move all static data arrays to `src/app/lib/data.ts` — Phase 5 if needed
-- [ ] Add `tsconfig.json` with strict mode — Phase 5 if needed
+### 4.4 Codebase Health
+- [x] 14 unused packages removed (80 sub-packages)
+- [x] `react`/`react-dom` moved to `dependencies` (was incorrectly in peerDeps)
+- [ ] 📋 Add `tsconfig.json` with `strict: true` and `@/*` path alias
+- [ ] 💡 Set up ESLint + Prettier
+- [ ] 💡 Move static data arrays to `src/app/lib/data.ts`
 
 ---
 
-## Known Bugs / Issues to Fix
+## Bugs / Issues
 
 | Priority | Issue | Status |
 |----------|-------|--------|
-| 🔴 Critical | ~~React Rules of Hooks violation in FAQ (useReveal inside .map)~~ | ✅ Fixed |
-| 🟡 Medium | ~~Registration buttons do nothing (no form, no modal)~~ | ✅ Fixed — Phase 1.1 |
-| 🟡 Medium | ~~All social/contact links point to `#`~~ | ✅ Fixed — config-driven |
-| 🟡 Medium | ~~Webinar date shows "To Be Announced"~~ | ✅ Fixed — countdown live |
-| � Medium | ~~`noindex, nofollow` meta tag blocks Google~~ | ✅ Fixed — Phase 1.4 |
-| 🟠 Low | About photo is a stock image, not Marlon | ⏳ Owner action needed |
-| 🟠 Low | Social URLs still point to `#` until config.ts is filled in | ⏳ Owner action needed |
-| 🟠 Low | No `tsconfig.json` — no type checking | 📋 Phase 4.5 |
-| 🟠 Low | MUI and other unused packages inflate node_modules | 📋 Phase 2.2 |
-| 🟠 Low | `react`/`react-dom` listed as optional peerDeps (should be deps) | 💡 Phase 4.5 |
-
+| 🔴 Critical | React Hooks violation in FAQ | ✅ Fixed |
+| 🟡 Medium | Registration buttons did nothing | ✅ Fixed |
+| 🟡 Medium | Social/contact links pointed to `#` | ✅ Partially fixed — FB/Messenger set, Instagram/YouTube pending |
+| 🟡 Medium | Webinar countdown not active | ⏳ Needs `webinarDate` set in config.ts |
+| 🟡 Medium | Registration form not sending emails | ⏳ Needs `formspreeEndpoint` set in config.ts |
+| 🟡 Medium | Testimonials not swipeable on mobile | ✅ Fixed — touch/drag added |
+| 🟠 Low | `noindex` blocked Google | ✅ Fixed |
+| 🟠 Low | `og:url` was wrong domain | ✅ Fixed |
+| 🟠 Low | About photo was stock image | ✅ Fixed — real photo in place |
+| 🟠 Low | No `tsconfig.json` — no strict type checking | 📋 Planned |
 
 ---
 
-https://www.facebook.com/lexie.lonzkie
-https://www.facebook.com/lexie.lonzkie
-https://www.facebook.com/lexie.lonzkiew
+## Next Actions (Priority Order)
+
+1. ⏳ **Owner:** Fill in `config.ts` — webinar date, Formspree endpoint, Instagram, YouTube
+2. ⏳ **Owner:** Update testimonials with real names and quotes
+3. ⏳ **Owner:** Provide branded `og:image` (1200×630 PNG/JPG) and favicon
+4. 📋 **Code:** Add `tsconfig.json` with strict mode
+5. 📋 **Code:** Add `sitemap.xml` (after custom domain confirmed)
+6. 📋 **Code:** GitHub branch protection + CI/CD GitHub Actions
