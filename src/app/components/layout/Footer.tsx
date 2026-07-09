@@ -3,7 +3,7 @@ import { Divider } from "@/app/components/shared/Divider";
 import { scrollTo } from "@/app/lib/utils";
 import { SITE_CONFIG } from "@/app/lib/config";
 
-const FOOTER_LINKS = ["Home", "About", "Benefits", "Webinar", "FAQ"];
+const FOOTER_LINKS = ["Home", "Benefits", "Webinar", "FAQ"];
 
 const SOCIAL_LINKS = [
   { Icon: Facebook, label: "Facebook", href: () => SITE_CONFIG.facebookUrl },

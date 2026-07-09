@@ -5,7 +5,6 @@ import { useRegistration } from "@/app/context/RegistrationContext";
 
 const NAV_LINKS = [
   { label: "Home", id: "home" },
-  { label: "About", id: "about" },
   { label: "Benefits", id: "benefits" },
   { label: "Webinar", id: "webinar" },
   { label: "FAQ", id: "faq" },

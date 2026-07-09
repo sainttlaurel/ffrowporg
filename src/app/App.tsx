@@ -13,7 +13,6 @@ import { Footer } from "@/app/components/layout/Footer";
 // Sections (in page order)
 import { Hero } from "@/app/components/sections/Hero";
 import { Testimonials } from "@/app/components/sections/Testimonials";
-import { About } from "@/app/components/sections/About";
 import { VideoIntro } from "@/app/components/sections/VideoIntro";
 import { Benefits } from "@/app/components/sections/Benefits";
 import { Webinar } from "@/app/components/sections/Webinar";
@@ -51,7 +50,6 @@ function AppInner() {
       <main id="main-content" role="main">
         <Hero />
         <Testimonials />
-        <About />
         <VideoIntro />
         <Benefits />
         <Webinar />
