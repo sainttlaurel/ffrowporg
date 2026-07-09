@@ -24,9 +24,10 @@
 - [x] shadcn/ui component library installed
 - [x] Custom dark theme (crimson/amber/black) via CSS custom properties
 - [x] Google Fonts: Cinzel, Raleway, Oswald
-- [x] Landing page sections: Hero, Testimonials, About, Benefits, Webinar, FAQ, Final CTA, Footer
+- [x] Landing page sections: Hero, Testimonials, Benefits, Webinar, FAQ, Final CTA, Footer
+- [x] About section removed — no longer part of the page
 - [x] Scroll-based navigation (smooth scroll to section IDs)
-- [x] Responsive navbar with mobile drawer
+- [x] Responsive navbar with mobile drawer — About link removed from nav
 - [x] Ember particle animation
 - [x] Scroll-reveal (IntersectionObserver) for sections
 - [x] Infinite marquee testimonials
@@ -60,24 +61,24 @@
 - [x] Facebook URL — set to https://www.facebook.com/lexie.lonzkie
 - [x] Footer host name reads from config
 - [x] All external links open in new tab with rel="noopener noreferrer"
-- [x] About photo — replaced stock image with real photo (/marlon.png)
-- [x] Speaker updated to Sir Mark Anthony Cruz across all sections and meta tags
-- [x] Webinar schedule set: 1:00 PM, 5:00 PM, 8:00 PM, 10:00 PM PHT (date TBA)
-- [x] Eligibility added: 18 years old and above only
-- [x] Availability added: Open to all countries
+- [x] Speaker set to Sir Mark Anthony Cruz across all sections and meta tags
+- [x] Webinar schedule: 1:00 PM, 5:00 PM, 8:00 PM, 10:00 PM PHT
+- [x] Webinar date set: July 20, 2026 — 1:00 PM PHT (countdown active)
+- [x] Registration wired to Google Forms — https://forms.gle/XES68JpqSYjioFb49 (free, unlimited, saves to Google Sheets)
+- [x] Eligibility: 18 years old and above only
+- [x] Availability: Open to all countries
 - [x] CTA copy: "Secure your slot — comment country + DRAGONS or send a direct message"
+- [x] Real logo added to navbar and footer (/logo.png)
+- [x] "Presented by / Independent Business Partner" text removed from footer
 - [ ] Owner: Set `instagramUrl` in config.ts
 - [ ] Owner: Set `youtubeUrl` in config.ts
-- [ ] Owner: Set `webinarDate` in config.ts — confirmed date (PHT) to activate countdown
-- [ ] Owner: Set `formspreeEndpoint` in config.ts — so registration emails send
 - [ ] Owner: Update testimonials with real partner names and quotes
 - [ ] Owner: Replace og:image with a real 1200x630 branded cover image
 - [ ] Owner: Replace emoji favicon with a real branded icon
-- [ ] Owner: Insert / update the Dragons Project logo in the navbar and footer
 
 ### 1.4 SEO & Meta Tags
 - [x] noindex removed — page is indexable
-- [x] Title and meta description updated
+- [x] Title and meta description updated with Sir Mark Anthony Cruz
 - [x] Open Graph tags (og:title, og:description, og:image, og:url, og:locale)
 - [x] Twitter Card tags
 - [x] theme-color meta for mobile browser chrome
@@ -168,12 +169,11 @@
 | Critical | React Hooks violation in FAQ | Fixed |
 | Medium | Registration buttons did nothing | Fixed |
 | Medium | Social links pointed to # | Partial — FB/Messenger set, Instagram/YouTube pending |
-| Medium | Webinar countdown not active | Pending — needs webinarDate in config.ts |
-| Medium | Registration form not sending emails | Pending — needs formspreeEndpoint in config.ts |
+| Medium | Webinar countdown not active | Fixed — set to July 20, 2026 1:00 PM PHT |
+| Medium | Registration form not sending emails | Fixed — Google Forms integration live |
 | Medium | Testimonials not swipeable on mobile | Fixed — touch/drag added |
 | Low | noindex blocked Google | Fixed |
 | Low | og:url was wrong domain | Fixed |
-| Low | About photo was stock image | Fixed — real photo in place |
 | Low | No tsconfig.json — no strict type checking | Planned |
 
 ---
@@ -182,12 +182,9 @@
 
 Owner actions — only the site owner can do these:
 
-1. Fill in config.ts — webinar date/time, Formspree endpoint, Instagram URL, YouTube URL
-2. Update testimonials with real partner names and quotes
+1. Update testimonials with real partner names and quotes
+2. Set `instagramUrl` and `youtubeUrl` in config.ts
 3. Provide branded og:image (1200x630 PNG/JPG) and favicon file
-4. Confirm whether to remove the "Live Host" badge from the About card
-5. Provide the Dragons Project logo file for navbar and footer
-6. Confirm webinar schedule (date, time, platform) so it can be set live
 
 Code tasks — can be done anytime:
 
@@ -195,4 +192,3 @@ Code tasks — can be done anytime:
 2. Add sitemap.xml (after custom domain is confirmed)
 3. GitHub branch protection on main
 4. GitHub Actions CI/CD for type checking and lint on pull requests
-

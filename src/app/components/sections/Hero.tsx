@@ -7,7 +7,6 @@ import {
   Users,
   Star,
   CheckCircle,
-  Flame,
 } from "lucide-react";
 import { Embers } from "@/app/components/shared/Embers";
 import { Divider } from "@/app/components/shared/Divider";
